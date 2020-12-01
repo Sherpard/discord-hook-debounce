@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { map, mergeMap } from 'rxjs/operators';
+import { bufferTime, map, mergeMap } from 'rxjs/operators';
 
 import { Debouncer } from './classes/debouncer.class';
 import { Bot } from './classes/discord-bot.class';
@@ -19,6 +19,8 @@ debouncer.addHandler(webService.message$);
 bot.addMessageHandler(
   debouncer.getGroupedMessagesObservable().pipe(
     mergeMap((x) => MessageSplitter.splitMessage(x)),
+    bufferTime(5000),
+    mergeMap((x) => x),
     map(mapper.mapMessage)
   )
 );
