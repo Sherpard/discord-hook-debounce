@@ -40,6 +40,7 @@ After that, you need to set the required enviroment variables (.env file is supp
 BOT_TOKEN=Your-Secret-Bot-Token
 GUILD_ID=The Guild where your bot is invited
 CHANNEL=Name of the channel where the bot will publish
+DEBOUNCE_DELAY= Delay in miliseconds until bot start processing received messages (Default 1000)
 ```
 
 After this, you can run the bot directly with node

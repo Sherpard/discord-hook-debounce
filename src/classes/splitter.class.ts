@@ -15,7 +15,6 @@ export class MessageSplitter {
     const l = msg.descriptions.length;
 
     while (i < l) {
-      console.warn(currLength);
       if (currLength >= MAX_MESSAGE_SIZE) {
         currMsg = { title: msg.title, user: msg.user, descriptions: [] };
         result.push(currMsg);
@@ -24,7 +23,7 @@ export class MessageSplitter {
       const desc: string = msg.descriptions[i];
       currMsg.descriptions.push(desc);
       // Decoration offset
-      currLength += desc.length + 50;
+      currLength += desc.length + 25;
       i++;
     }
 

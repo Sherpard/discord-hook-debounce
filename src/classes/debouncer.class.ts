@@ -4,10 +4,18 @@ import { debounceTime, map } from 'rxjs/operators';
 import { GroupedMessage } from '../interfaces/grouped-messages.interface';
 import { NotificationMessage } from '../interfaces/notification-message.interface';
 
+const DEFAULT_DEBOUNCE_DELAY = 1000;
+
 export class Debouncer {
   private readonly cache: { [key: string]: GroupedMessage } = {};
 
+  private readonly DEBOUNCE_DELAY: number;
+
   private internalBouncer: Subject<string> = new Subject();
+
+  constructor() {
+    this.DEBOUNCE_DELAY = Number(process.env.DEBOUNCE_DELAY) || DEFAULT_DEBOUNCE_DELAY;
+  }
 
   public addHandler(handler: Observable<NotificationMessage>): void {
     handler.subscribe((msg) => this.addMessage(msg));
@@ -23,7 +31,7 @@ export class Debouncer {
 
   public getGroupedMessagesObservable(): Observable<GroupedMessage> {
     return this.internalBouncer.pipe(
-      debounceTime(5000),
+      debounceTime(this.DEBOUNCE_DELAY),
       map((key) => {
         const gm: GroupedMessage = this.cache[key];
         delete this.cache[key];
