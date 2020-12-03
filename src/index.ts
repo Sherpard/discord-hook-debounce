@@ -6,7 +6,7 @@ import { Bot } from './classes/discord-bot.class';
 import { MessageSplitter } from './classes/splitter.class';
 import { WebService } from './classes/web-service.class';
 import { GroupedMessageMapper } from './message-mappers/grouped-message-mapper.interface';
-import { SimpleMessageMapper } from './message-mappers/simple-message-mapper copy';
+import { SimpleMessageMapper } from './message-mappers/simple-message-mapper';
 
 dotenv.config();
 
