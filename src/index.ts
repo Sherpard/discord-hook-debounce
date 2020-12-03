@@ -5,15 +5,15 @@ import { Debouncer } from './classes/debouncer.class';
 import { Bot } from './classes/discord-bot.class';
 import { MessageSplitter } from './classes/splitter.class';
 import { WebService } from './classes/web-service.class';
-import { DefaultMessageMapper } from './message-mappers/default-message-mapper';
 import { GroupedMessageMapper } from './message-mappers/grouped-message-mapper.interface';
+import { SimpleMessageMapper } from './message-mappers/simple-message-mapper copy';
 
 dotenv.config();
 
 const bot: Bot = new Bot();
 const webService: WebService = new WebService();
 const debouncer: Debouncer = new Debouncer();
-const mapper: GroupedMessageMapper = new DefaultMessageMapper();
+const mapper: GroupedMessageMapper = new SimpleMessageMapper();
 
 debouncer.addHandler(webService.message$);
 bot.addMessageHandler(
@@ -25,5 +25,4 @@ bot.addMessageHandler(
 );
 
 webService.startServer();
-
 bot.doLogin();

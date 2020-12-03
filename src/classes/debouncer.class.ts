@@ -30,6 +30,15 @@ export class Debouncer {
   }
 
   public getGroupedMessagesObservable(): Observable<GroupedMessage> {
+    /**
+     TODO: FIX ORPHAN MESSAGES; debounceTime is a lossy operator
+     Example:
+     Handling 2 notifications of the same kind, would leave the first one orphan.
+     emit(1)
+     emit(2)
+     debounce.subscribe would only receive 2.
+     */
+
     return this.internalBouncer.pipe(
       debounceTime(this.DEBOUNCE_DELAY),
       map((key) => {

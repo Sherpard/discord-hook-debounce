@@ -23,7 +23,7 @@ export class MessageSplitter {
       const desc: string = msg.descriptions[i];
       currMsg.descriptions.push(desc);
       // Decoration offset
-      currLength += desc.length + 25;
+      currLength += desc.length + 2; // Newline
       i++;
     }
 

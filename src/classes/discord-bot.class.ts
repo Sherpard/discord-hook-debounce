@@ -58,7 +58,6 @@ export class Bot {
         (c) => {
           this.textChannel = c;
           console.info('Channel Retrieval Successful');
-          //    c.send("I'm Alive");
         },
         (e) => console.error('Could not find channel / guild', e)
       );
